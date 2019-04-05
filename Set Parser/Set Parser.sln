@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Set Parser", "Set Parser\Set Parser.csproj", "{4314E644-E681-4BD4-937D-F6833A7ACE4A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4314E644-E681-4BD4-937D-F6833A7ACE4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4314E644-E681-4BD4-937D-F6833A7ACE4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4314E644-E681-4BD4-937D-F6833A7ACE4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4314E644-E681-4BD4-937D-F6833A7ACE4A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {62CEE4CD-50E4-4487-9D6D-6FB64716A568}
+	EndGlobalSection
+EndGlobal

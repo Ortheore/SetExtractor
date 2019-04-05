@@ -1,0 +1,22 @@
+C:\Users\Matt Washer\Documents\SetExtractor\Set Parser\Set Parser\bin\Debug\Set Parser.exe.config
+C:\Users\Matt Washer\Documents\SetExtractor\Set Parser\Set Parser\bin\Debug\Set Parser.exe
+C:\Users\Matt Washer\Documents\SetExtractor\Set Parser\Set Parser\bin\Debug\Set Parser.pdb
+C:\Users\Matt Washer\Documents\SetExtractor\Set Parser\Set Parser\obj\Debug\Set Parser.csprojAssemblyReference.cache
+C:\Users\Matt Washer\Documents\SetExtractor\Set Parser\Set Parser\obj\Debug\MainWindow.g.cs
+C:\Users\Matt Washer\Documents\SetExtractor\Set Parser\Set Parser\obj\Debug\App.g.cs
+C:\Users\Matt Washer\Documents\SetExtractor\Set Parser\Set Parser\obj\Debug\Set Parser_MarkupCompile.cache
+C:\Users\Matt Washer\Documents\SetExtractor\Set Parser\Set Parser\obj\Debug\Set Parser_MarkupCompile.lref
+C:\Users\Matt Washer\Documents\SetExtractor\Set Parser\Set Parser\obj\Debug\MainWindow.baml
+C:\Users\Matt Washer\Documents\SetExtractor\Set Parser\Set Parser\obj\Debug\Set Parser.g.resources
+C:\Users\Matt Washer\Documents\SetExtractor\Set Parser\Set Parser\obj\Debug\Set_Parser.Properties.Resources.resources
+C:\Users\Matt Washer\Documents\SetExtractor\Set Parser\Set Parser\obj\Debug\Set Parser.csproj.GenerateResource.cache
+C:\Users\Matt Washer\Documents\SetExtractor\Set Parser\Set Parser\obj\Debug\Set Parser.csproj.CoreCompileInputs.cache
+C:\Users\Matt Washer\Documents\SetExtractor\Set Parser\Set Parser\obj\Debug\Set Parser.exe
+C:\Users\Matt Washer\Documents\SetExtractor\Set Parser\Set Parser\obj\Debug\Set Parser.pdb
+C:\Users\Matt Washer\Documents\SetExtractor\Set Parser\Set Parser\bin\Debug\HtmlAgilityPack.dll
+C:\Users\Matt Washer\Documents\SetExtractor\Set Parser\Set Parser\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\Matt Washer\Documents\SetExtractor\Set Parser\Set Parser\bin\Debug\HtmlAgilityPack.xml
+C:\Users\Matt Washer\Documents\SetExtractor\Set Parser\Set Parser\obj\Debug\Set Parser.csproj.CopyComplete
+C:\Users\Matt Washer\Documents\SetExtractor\Set Parser\Set Parser\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Matt Washer\Documents\SetExtractor\Set Parser\Set Parser\bin\Debug\Newtonsoft.Json.pdb
+C:\Users\Matt Washer\Documents\SetExtractor\Set Parser\Set Parser\bin\Debug\Newtonsoft.Json.xml

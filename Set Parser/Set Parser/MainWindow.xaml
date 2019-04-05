@@ -1,0 +1,56 @@
+﻿<Window x:Class="Set_Parser.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Set_Parser"
+        mc:Ignorable="d"
+        Title="Stat Parser" Height="500" Width="525">
+    <Grid>
+        <Label x:Name="lblSelStats" Content="Select stats:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnRecent" Content="Most Recent" HorizontalAlignment="Left" Margin="87,13,0,0" VerticalAlignment="Top" Width="75" Click="BtnRecent_Click"/>
+        <ComboBox x:Name="cbxPeriod" HorizontalAlignment="Left" Margin="167,12,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="CbxPeriod_SelectionChanged"/>
+        <Separator HorizontalAlignment="Stretch" Height="10" Margin="0,41,0,0" VerticalAlignment="Top" Width="Auto"/>
+        <Label x:Name="lblSelectTier" Content="Select Tier:" HorizontalAlignment="Left" Margin="10,56,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbxTier" HorizontalAlignment="Left" Margin="87,58,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0" IsEnabled="False"/>
+        <Label x:Name="lblLevel" Content="Level" HorizontalAlignment="Left" Margin="212,56,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbxLevel" HorizontalAlignment="Left" Height="23" Margin="254,57,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPokemon" Content="Pokemon" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblPokeUsage" Content="Minimum Usage (%):" HorizontalAlignment="Left" Margin="82,85,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbxPokeUsage" HorizontalAlignment="Left" Height="23" Margin="202,89,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="3.41"/>
+        <Label x:Name="lblPokeRank" Content="Rank:" HorizontalAlignment="Left" Margin="322,86,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbxPokeRank" HorizontalAlignment="Left" Height="23" Margin="361,89,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblMoves" Content="Moves" HorizontalAlignment="Left" Margin="10,115,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblMovesUsage" Content="Minimum Usage: (%)" HorizontalAlignment="Left" Margin="82,115,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbxMovesUsage" HorizontalAlignment="Left" Height="23" Margin="202,119,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblMovesRank" Content="Rank:" HorizontalAlignment="Left" Margin="322,115,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbxMovesRank" HorizontalAlignment="Left" Height="23" Margin="361,119,0,0" TextWrapping="Wrap" Text="4" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblAbilities" Content="Abilities" HorizontalAlignment="Left" Margin="10,145,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblAbilitiesUsage" Content="Minimum Usage (%):" HorizontalAlignment="Left" Margin="82,145,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbxAbilitiesUsage" HorizontalAlignment="Left" Height="23" Margin="202,149,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblAbilitiesRank" Content="Rank:" HorizontalAlignment="Left" Margin="322,145,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbxAbilitiesRank" HorizontalAlignment="Left" Height="23" Margin="361,149,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblItems" Content="Items" HorizontalAlignment="Left" Margin="10,175,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblItemsUsage" Content="Minimum Usage (%):" HorizontalAlignment="Left" Margin="82,175,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbxItemsUsage" HorizontalAlignment="Left" Height="23" Margin="202,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblItemsRank" Content="Rank:" HorizontalAlignment="Left" Margin="322,175,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbxItemsRank" HorizontalAlignment="Left" Height="23" Margin="361,179,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblEVs" Content="EV Spreads" HorizontalAlignment="Left" Margin="10,205,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblEVsUsage" Content="Minimum Usage (%):" HorizontalAlignment="Left" Margin="82,205,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbxEVsUsage" HorizontalAlignment="Left" Height="23" Margin="202,209,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblEVsRank" Content="Rank:" HorizontalAlignment="Left" Margin="322,205,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbxEVsRank" HorizontalAlignment="Left" Height="23" Margin="361,209,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblExtraEVs" Content="Additional EV Spreads:" HorizontalAlignment="Left" Margin="10,235,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="chxMax" Content="252" HorizontalAlignment="Left" Margin="187,241,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="chxMaxPlus" Content="252+" HorizontalAlignment="Left" Margin="240,241,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="chxMaxZero" Content="252/0" HorizontalAlignment="Left" Margin="290,241,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="chxMaxMaxPlus" Content="252/252+" HorizontalAlignment="Left" Margin="350,241,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tbkWarning" HorizontalAlignment="Left" Margin="15,261,15,0" TextWrapping="Wrap" Text="Note- exceeding the default ranks is likely to result in very large importables/setdexes, which may cause issues. This is because for every instance where the parameter exceeds what's permitted in-game, a new set is added (so selecting 252 and 252+ generates at least two sets for every pokemon). This becomes exponential across categories. At the very least, such conditions should be manually reviewed... which hasn't been implemented yet" VerticalAlignment="Top"/>
+        <Button x:Name="btnGetStats" Content="Get Stats" HorizontalAlignment="Left" Margin="417,346,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False" Click="BtnGetStats_Click"/>
+        <Separator HorizontalAlignment="Stretch" Height="10" Margin="0,369,0,0" VerticalAlignment="Top" Width="Auto"/>
+        <Button x:Name="btnReview" Content="Review" HorizontalAlignment="Left" Margin="417,384,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False"/>
+        <Button x:Name="btnList" Content="Get List" HorizontalAlignment="Left" Margin="232,409,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False"/>
+        <Button x:Name="btnSetDex" Content="Get SetDex" HorizontalAlignment="Left" Margin="417,409,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False"/>
+        <Button x:Name="btnImportable" Content="Get Importables" HorizontalAlignment="Left" Margin="312,409,0,0" VerticalAlignment="Top" Width="100" IsEnabled="False"/>
+    </Grid>
+</Window>

@@ -1,0 +1,11 @@
+Should probably tweak UI so that stuff that's on the right hand side is aligned appropriately
+Also should handle window resizing
+Haven't implemented much in the way of error handling. Will need to fix that
+
+Should probably add an option to save the results in a more human readable format. Ideally sort by power, possibly against an uninvested neutral Arc.
+
+NOTE
+Will probably want to transpose a version of this app into my fork of the damage calc, polish that up a little and then maybe submit a pull request
+
+===================================================
+Currently the pokemon class is extremely bloated with adding stuff for each list. Probably best to create another class that basically consists of a list of usage entities, and then add the appropriate methods to that
