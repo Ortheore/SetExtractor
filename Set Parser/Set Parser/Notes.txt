@@ -7,5 +7,11 @@ Should probably add an option to save the results in a more human readable forma
 NOTE
 Will probably want to transpose a version of this app into my fork of the damage calc, polish that up a little and then maybe submit a pull request
 
+Consider adding a progress bar or something
+Consider scrapping this entirely. I plan on replicating this on the website as well, which would kinda supplant this? Wait nvm, the website one is too limited (e.g. it will restrict to only one set per mon, which isn't totally adequate)
+
+Will be commenting TEST and ISSUE where appropriate. Remove all tests when done with them, while issues should be dealt with eventually. TWEAK is for stuff that works, but is done in a really stupid manner. UNTESTED is purely for when I decide I'm due to back this up to github, but I'm in the middle of working on stuff
+
 ===================================================
-Currently the pokemon class is extremely bloated with adding stuff for each list. Probably best to create another class that basically consists of a list of usage entities, and then add the appropriate methods to that
+Ok, now to actually use usagecollection to process the json data
+... ooooooook now I need a pokemon class
