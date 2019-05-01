@@ -1,8 +1,12 @@
 Should probably tweak UI so that stuff that's on the right hand side is aligned appropriately
 Also should handle window resizing
 Haven't implemented much in the way of error handling. Will need to fix that
+I suspect the TrimJSON step is doing more harm than good, as this program is taking fkn ages to run. Need to test
+Remove ../ from menu select... I'll get to this later
 
 Should probably add an option to save the results in a more human readable format. Ideally sort by power, possibly against an uninvested neutral Arc.
+
+
 
 NOTE
 Will probably want to transpose a version of this app into my fork of the damage calc, polish that up a little and then maybe submit a pull request

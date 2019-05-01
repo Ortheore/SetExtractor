@@ -32,6 +32,7 @@ namespace Set_Parser
         private List<string> allTiers;
         private int level;
         private bool max, maxPlus, maxZero, maxMaxPlus;
+        private List<Pokemon> sets;
 
         public MainWindow()
         {
@@ -150,10 +151,22 @@ namespace Set_Parser
                     usg.Add(enumerator.Current.Name, f);
                 }  
             }
+            //TEST... duh
+            List<string> test;
+            test = usg.ApplyFilter(10);//ApplyFilter currently works for ints and floats, haven't tested both
             //////////The rest of this section of code is UNTESTED////////////////
-            List<Pokemon> sets = new List<Pokemon>();
-            foreach (string name in GetNames(ranks["pokeRank"], usages["pokeUsage"], usg)) sets.Add(new Pokemon(name));
-
+            sets = new List<Pokemon>();
+            List<string> names = GetNames(ranks["pokeRank"], usages["pokeUsage"], usg);
+            if (names != null)
+            {
+                foreach (string name in names) sets.Add(new Pokemon(name));
+            }
+            else
+            {
+                MessageBox.Show("Error generating correct list of pokemon.");
+                return;
+            }
+            
             //Load list of damaging attacks
             StreamReader reader = new StreamReader("attacks.json");
             string[] dmgAttacks = JArray.Parse(reader.ReadToEnd()).ToObject<string[]>();
@@ -175,6 +188,7 @@ namespace Set_Parser
                 //Note- additional spreads are to be added when generating list/importables/setdex
                 pokemon.Spreads= GetNames(ranks["evsRank"], usages["evsUsage"], GetData((JObject)data[pokemon.Name]["Spreads"]));
             }
+            Console.WriteLine("success");
         }
 
         //Validates the inputs from the text boxes in the main window    
@@ -248,7 +262,7 @@ namespace Set_Parser
         private List<string> GetNames(int rank, float usg, UsageCollection coll)
         {
             if (rank >= 0 && usg >= 0) return coll.ApplyFilter(usg, rank);
-            else if (rank < 0 && usg >= 0) return coll.ApplyFilter(usg);
+            else if (rank < 0 && usg >= 0)return coll.ApplyFilter(usg);
             else if (rank >= 0 && usg < 0) return coll.ApplyFilter(rank);
             else return null; 
         }
