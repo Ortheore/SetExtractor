@@ -40,7 +40,18 @@ namespace Set_Parser
             
             allPeriods = new List<string>();
             recent = ScrapeStats("https://www.smogon.com/stats/", ref allPeriods).DocumentNode.SelectSingleNode("//pre//a[last()]").InnerText;
+            allPeriods.Remove("../");
             cbxPeriod.ItemsSource = allPeriods;
+
+            //RunTest();
+        }
+
+        private void RunTest()//TEST... obviously
+        {
+            BtnRecent_Click(null, null);
+            cbxTier.SelectedValue = "gen7ubers-1760.json";
+            level = 100;
+            BtnGetStats_Click(null, null);
         }
 
         //Updates target list with text of all links present on page in url. Also returns HtmlDoc since that's useful
@@ -60,6 +71,7 @@ namespace Set_Parser
         }
         //Currently a mod of ScrapeStats, will want this to convert the the data at the url into json, to then be converted into an actual class.
         //Also this probably isn't worth putting into its own function, I'm just tinkering with firefox atm so I cbf looking up docs
+        //TWEAK?
         private HtmlDocument ScrapeJSON(string url)
         {
             WebClient web = new WebClient();
@@ -87,6 +99,7 @@ namespace Set_Parser
             //Bring up list of tiers for selected period
             allTiers = new List<string>();
             ScrapeStats("https://www.smogon.com/stats/" + cbxPeriod.SelectedValue+"chaos/", ref allTiers);
+            allTiers.Remove("../");
             cbxTier.ItemsSource = allTiers;
 
             cbxTier.IsEnabled = true;
@@ -96,7 +109,7 @@ namespace Set_Parser
         private void BtnGetStats_Click(object sender, RoutedEventArgs e)
         {
             //For these dictionaries and level, -1 is used to indicate no input
-            level = -1;
+            //level = -1;//TEST this would normally execute, but it's easier to test without this setting it to -1
             Dictionary<string, int> ranks = new Dictionary<string, int>
             {
                 {"pokeRank",-1 },
@@ -153,7 +166,7 @@ namespace Set_Parser
             }
             //TEST... duh
             List<string> test;
-            test = usg.ApplyFilter(10);//ApplyFilter currently works for ints and floats, haven't tested both
+            test = usg.ApplyFilter((float)3.41, 25);//ApplyFilter currently works for ints and floats, haven't tested both
             //////////The rest of this section of code is UNTESTED////////////////
             sets = new List<Pokemon>();
             List<string> names = GetNames(ranks["pokeRank"], usages["pokeUsage"], usg);
