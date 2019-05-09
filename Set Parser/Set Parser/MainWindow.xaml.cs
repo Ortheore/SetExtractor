@@ -180,7 +180,7 @@ namespace Set_Parser
             
             //Load list of damaging attacks
             StreamReader reader = new StreamReader("attacks.json");
-            string[] dmgAttacks = JArray.Parse(reader.ReadToEnd()).ToObject<string[]>();
+            string[] dmgAttacks = JArray.Parse((string)JObject.Parse(reader.ReadToEnd())["attacks"]).ToObject<string[]>();
             
             //Fill out the rest of the pokemon class
             foreach(Pokemon pokemon in sets)
@@ -207,7 +207,6 @@ namespace Set_Parser
         //Level takes a reference because it seems right. I could just as easily remove it as a parameter and just rely on the global, but that seems like the wrong thing to do. Could just be me though.
         private bool ValidateNumbers(Dictionary<string, int> ranks, Dictionary<string, float> usages, bool ignoreEVs, ref int level)
         {
-            //Sooooo the dictionary elements are being passed by value, cannot be passed by reference or used as an out parameter in TryParse. What a fucking pain in the ass. I guess the easiest thing would be to just pass the dictionary along with the key. Still, seems stupid to go through this many layers.
             if (!(int.TryParse(tbxLevel.Text, out level) && level > 0)) return false;
             if (!ValidatePositive(tbxPokeRank.Text, ranks,"pokeRank") & !ValidatePercent(tbxPokeUsage.Text, usages,"pokeUsage")) return false;
             if (!ValidatePositive(tbxMovesRank.Text, ranks,"movesRank") & !ValidatePercent(tbxMovesUsage.Text, usages,"movesUsage")) return false;
