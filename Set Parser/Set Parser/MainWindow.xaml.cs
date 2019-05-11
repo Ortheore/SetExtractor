@@ -165,7 +165,7 @@ namespace Set_Parser
                 }  
             }
 
-            //////////The rest of this section of code is UNTESTED////////////////
+            //////////The rest of this section of code is inadequately TESTED////////////////
             sets = new List<Pokemon>();
             List<string> names = GetNames(ranks["pokeRank"], usages["pokeUsage"], usg);
             if (names != null)
@@ -180,18 +180,16 @@ namespace Set_Parser
             
             //Load list of damaging attacks
             StreamReader reader = new StreamReader("attacks.json");
-            string[] dmgAttacks = JArray.Parse((string)JObject.Parse(reader.ReadToEnd())["attacks"]).ToObject<string[]>();
-            
+            JObject attacks = JObject.Parse(reader.ReadToEnd());
+            string[] dmgAttacks = attacks["attacks"].ToObject<string[]>();
+
             //Fill out the rest of the pokemon class
-            foreach(Pokemon pokemon in sets)
+            foreach (Pokemon pokemon in sets)
             {
                 //Remove non-damaging moves
                 //TWEAK currently this gets the top ranking moves before checking whether or not they're attacking. May want to check first, then if some are removed, replace them with the next attacking moves
                 List<string> moves=GetNames(ranks["movesRank"], usages["movesUsage"], GetData((JObject)data[pokemon.Name]["Moves"]));
-                foreach(string move in moves)
-                {
-                    if (!dmgAttacks.Contains(move)) moves.Remove(move);
-                }
+                moves.RemoveAll(i => !dmgAttacks.Contains(i));
                 pokemon.Moves = moves;
 
                 pokemon.Abilities = GetNames(ranks["abilitiesRank"], usages["abilitiesUsage"], GetData((JObject)data[pokemon.Name]["Abilities"]));
@@ -199,7 +197,6 @@ namespace Set_Parser
                 //Note- additional spreads are to be added when generating list/importables/setdex
                 pokemon.Spreads= GetNames(ranks["evsRank"], usages["evsUsage"], GetData((JObject)data[pokemon.Name]["Spreads"]));
             }
-            Console.WriteLine("success");
         }
 
         //Validates the inputs from the text boxes in the main window    

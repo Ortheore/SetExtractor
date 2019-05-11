@@ -13,3 +13,8 @@ Consider scrapping this entirely. I plan on replicating this on the website as w
 Will be commenting TEST and ISSUE where appropriate. Remove all tests when done with them, while issues should be dealt with eventually. TWEAK is for stuff that works, but is done in a really stupid manner. UNTESTED is purely for when I decide I'm due to back this up to github, but I'm in the middle of working on stuff
 
 ===================================================
+Current test function now runs through to completion.
+>Moves is empty
+>Spreads is empty
+
+Have only tested for 3.41% usg, 4 moves, 1 ability, 1 item, 1 spread. Further testing required. Need to test usg for moves/abilities/items/spreads, ranks for pokemon. Need to test having both rank and usg as criteria. Need to test for multiple entries moves/items/spreads/abilities.
