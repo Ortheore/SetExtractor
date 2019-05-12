@@ -1,12 +1,8 @@
 Should probably tweak UI so that stuff that's on the right hand side is aligned appropriately
 Also should handle window resizing
 Haven't implemented much in the way of error handling. Will need to fix that
-I suspect the TrimJSON step is doing more harm than good, as this program is taking fkn ages to run. Need to test
-Remove ../ from menu select... I'll get to this later
 
 Should probably add an option to save the results in a more human readable format. Ideally sort by power, possibly against an uninvested neutral Arc.
-
-
 
 NOTE
 Will probably want to transpose a version of this app into my fork of the damage calc, polish that up a little and then maybe submit a pull request
@@ -17,5 +13,8 @@ Consider scrapping this entirely. I plan on replicating this on the website as w
 Will be commenting TEST and ISSUE where appropriate. Remove all tests when done with them, while issues should be dealt with eventually. TWEAK is for stuff that works, but is done in a really stupid manner. UNTESTED is purely for when I decide I'm due to back this up to github, but I'm in the middle of working on stuff
 
 ===================================================
-Ok, now to actually use usagecollection to process the json data
-... ooooooook now I need a pokemon class
+Current test function now runs through to completion.
+>Moves is empty
+>Spreads is empty
+
+Have only tested for 3.41% usg, 4 moves, 1 ability, 1 item, 1 spread. Further testing required. Need to test usg for moves/abilities/items/spreads, ranks for pokemon. Need to test having both rank and usg as criteria. Need to test for multiple entries moves/items/spreads/abilities.

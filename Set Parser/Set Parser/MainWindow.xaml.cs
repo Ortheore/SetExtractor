@@ -40,7 +40,18 @@ namespace Set_Parser
             
             allPeriods = new List<string>();
             recent = ScrapeStats("https://www.smogon.com/stats/", ref allPeriods).DocumentNode.SelectSingleNode("//pre//a[last()]").InnerText;
+            allPeriods.Remove("../");
             cbxPeriod.ItemsSource = allPeriods;
+
+            RunTest();//TEST... obviously
+        }
+
+        private void RunTest()//TEST... obviously
+        {
+            BtnRecent_Click(null, null);
+            cbxTier.SelectedValue = "gen7ubers-1760.json";
+            tbxLevel.Text = "100";
+            BtnGetStats_Click(null, null);
         }
 
         //Updates target list with text of all links present on page in url. Also returns HtmlDoc since that's useful
@@ -60,6 +71,7 @@ namespace Set_Parser
         }
         //Currently a mod of ScrapeStats, will want this to convert the the data at the url into json, to then be converted into an actual class.
         //Also this probably isn't worth putting into its own function, I'm just tinkering with firefox atm so I cbf looking up docs
+        //TWEAK?
         private HtmlDocument ScrapeJSON(string url)
         {
             WebClient web = new WebClient();
@@ -87,6 +99,7 @@ namespace Set_Parser
             //Bring up list of tiers for selected period
             allTiers = new List<string>();
             ScrapeStats("https://www.smogon.com/stats/" + cbxPeriod.SelectedValue+"chaos/", ref allTiers);
+            allTiers.Remove("../");
             cbxTier.ItemsSource = allTiers;
 
             cbxTier.IsEnabled = true;
@@ -136,7 +149,7 @@ namespace Set_Parser
             WebClient web = new WebClient();
             string json = web.DownloadString(url);//ISSUE unhandled exception here if stats not available
 
-            JObject data = TrimJSON(json);
+            JObject data = (JObject)JObject.Parse(json)["data"];
 
             //Collect pokemon + usage, then apply filters before processing other attributes
             UsageCollection usg = new UsageCollection();
@@ -151,10 +164,8 @@ namespace Set_Parser
                     usg.Add(enumerator.Current.Name, f);
                 }  
             }
-            //TEST... duh
-            List<string> test;
-            test = usg.ApplyFilter(10);//ApplyFilter currently works for ints and floats, haven't tested both
-            //////////The rest of this section of code is UNTESTED////////////////
+
+            //////////The rest of this section of code is inadequately TESTED////////////////
             sets = new List<Pokemon>();
             List<string> names = GetNames(ranks["pokeRank"], usages["pokeUsage"], usg);
             if (names != null)
@@ -169,18 +180,16 @@ namespace Set_Parser
             
             //Load list of damaging attacks
             StreamReader reader = new StreamReader("attacks.json");
-            string[] dmgAttacks = JArray.Parse(reader.ReadToEnd()).ToObject<string[]>();
-            
+            JObject attacks = JObject.Parse(reader.ReadToEnd());
+            string[] dmgAttacks = attacks["attacks"].ToObject<string[]>();
+
             //Fill out the rest of the pokemon class
-            foreach(Pokemon pokemon in sets)
+            foreach (Pokemon pokemon in sets)
             {
                 //Remove non-damaging moves
                 //TWEAK currently this gets the top ranking moves before checking whether or not they're attacking. May want to check first, then if some are removed, replace them with the next attacking moves
                 List<string> moves=GetNames(ranks["movesRank"], usages["movesUsage"], GetData((JObject)data[pokemon.Name]["Moves"]));
-                foreach(string move in moves)
-                {
-                    if (!dmgAttacks.Contains(move)) moves.Remove(move);
-                }
+                moves.RemoveAll(i => !dmgAttacks.Contains(i));
                 pokemon.Moves = moves;
 
                 pokemon.Abilities = GetNames(ranks["abilitiesRank"], usages["abilitiesUsage"], GetData((JObject)data[pokemon.Name]["Abilities"]));
@@ -188,22 +197,21 @@ namespace Set_Parser
                 //Note- additional spreads are to be added when generating list/importables/setdex
                 pokemon.Spreads= GetNames(ranks["evsRank"], usages["evsUsage"], GetData((JObject)data[pokemon.Name]["Spreads"]));
             }
-            Console.WriteLine("success");
         }
 
         //Validates the inputs from the text boxes in the main window    
         //Doesn't strictly need to be in its own function, but it does avoid unnecessarily checking all inputs even after input is found to be false. Could've just used goto for that, but I think this is just neater
         //Level takes a reference because it seems right. I could just as easily remove it as a parameter and just rely on the global, but that seems like the wrong thing to do. Could just be me though.
-        private bool ValidateNumbers(Dictionary<string, int> lvlRanks, Dictionary<string, float> usages, bool ignoreEVs, ref int level)
+        private bool ValidateNumbers(Dictionary<string, int> ranks, Dictionary<string, float> usages, bool ignoreEVs, ref int level)
         {
             if (!(int.TryParse(tbxLevel.Text, out level) && level > 0)) return false;
-            if (!ValidatePositive(tbxPokeRank.Text, lvlRanks["pokeRank"]) && !ValidatePercent(tbxPokeUsage.Text, usages["pokeUsage"])) return false;
-            if (!ValidatePositive(tbxMovesRank.Text, lvlRanks["movesRank"]) && !ValidatePercent(tbxMovesUsage.Text, usages["movesUsage"])) return false;
-            if (!ValidatePositive(tbxItemsRank.Text, lvlRanks["itemsRank"]) && !ValidatePercent(tbxItemsUsage.Text, usages["itemsUsage"])) return false;
-            if (!ValidatePositive(tbxAbilitiesRank.Text, lvlRanks["abilitiesRank"]) && !ValidatePercent(tbxAbilitiesUsage.Text, usages["abilitiesUsage"])) return false;
+            if (!ValidatePositive(tbxPokeRank.Text, ranks,"pokeRank") & !ValidatePercent(tbxPokeUsage.Text, usages,"pokeUsage")) return false;
+            if (!ValidatePositive(tbxMovesRank.Text, ranks,"movesRank") & !ValidatePercent(tbxMovesUsage.Text, usages,"movesUsage")) return false;
+            if (!ValidatePositive(tbxItemsRank.Text, ranks,"itemsRank") & !ValidatePercent(tbxItemsUsage.Text, usages,"itemsUsage")) return false;
+            if (!ValidatePositive(tbxAbilitiesRank.Text, ranks,"abilitiesRank") & !ValidatePercent(tbxAbilitiesUsage.Text, usages,"abilitiesUsage")) return false;
             if (!ignoreEVs)
             {
-                if (!ValidatePositive(tbxEVsRank.Text, lvlRanks["movesRank"]) && !ValidatePercent(tbxEVsUsage.Text, usages["evsUsage"])) return false;
+                if (!ValidatePositive(tbxEVsRank.Text, ranks,"movesRank") & !ValidatePercent(tbxEVsUsage.Text, usages,"evsUsage")) return false;
             }
             return true;
         }
@@ -219,44 +227,31 @@ namespace Set_Parser
         }
 
         //Checks that an integer is >0, saves it to the target if it was passed by reference and returns whether or not it's valid
-        private bool ValidatePositive(string input, int target)
+        private bool ValidatePositive(string input, Dictionary<string, int> ranks, string key)
         {
-            if (int.TryParse(input, out target) && target > 0) return true;
+            int i=-1;
+            if (int.TryParse(input, out i) && i > 0)
+            {
+                ranks[key] = i;
+                return true;
+            }
             else return false;
         }
 
-        //Checks that an float is >=0 and <=100, saves it to the target and returns whether or not it's valid
-        private bool ValidatePercent(string input, float target)
+        //Checks that an float is >=0 and <=100, converts to decimal, saves it to the target and returns whether or not it's valid
+        private bool ValidatePercent(string input, Dictionary<string, float> usages, string key)
         {
-            if (float.TryParse(input, out target))
+            float f = -1;
+            if (float.TryParse(input, out f))
             {
-                if (target >= 0 && target <= 100) return true;
+                if (f >= 0 && f <= 100)
+                {
+                    usages[key] =f/100;
+                    return true;
+                }
                 else return false;
             }
             else return false;
-        }
-
-        //Remove unnecessary stuff from initial json string and store in JObject. I think this will make things run more smoothly?
-        private JObject TrimJSON(string json)
-        {
-            JObject data = (JObject)JObject.Parse(json)["data"];
-            IEnumerable<JProperty> mons = data.Properties();
-            IEnumerator<JProperty> enumerator = mons.GetEnumerator();
-            string[] badProperties = new string[] { "Checks and Counters", "Teammates", "Raw count","Happiness", "Viability Ceiling" };
-
-            while (enumerator.MoveNext() != false)
-            {
-                JObject current = (JObject)data[enumerator.Current.Name];
-                for (int p = 0; p < badProperties.Length; p++)
-                {
-                    if (current.Property(badProperties[p]) != null)
-                    {
-                        current.Property(badProperties[p]).Remove();
-                    }
-                }
-            }
-
-            return data;
         }
 
         private List<string> GetNames(int rank, float usg, UsageCollection coll)
