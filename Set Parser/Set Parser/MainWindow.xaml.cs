@@ -147,7 +147,7 @@ namespace Set_Parser
             //Get stats
             string url = "https://www.smogon.com/stats/" + cbxPeriod.SelectedValue+"chaos/"+cbxTier.SelectedValue;
             WebClient web = new WebClient();
-            string json = web.DownloadString(url);//ISSUE unhandled exception here if stats not available
+            string json = web.DownloadString(url);//ISSUE unhandled exception here if stats not available, also I've encountered issues where data ended up being null, indicating partial data was received I guess
 
             JObject data = (JObject)JObject.Parse(json)["data"];
 
@@ -189,7 +189,9 @@ namespace Set_Parser
             {
                 //Remove non-damaging moves
                 //TWEAK currently this gets the top ranking moves before checking whether or not they're attacking. May want to check first, then if some are removed, replace them with the next attacking moves
-                List<string> moves=GetNames(ranks["movesRank"], usages["movesUsage"], GetData((JObject)data[pokemon.Name]["Moves"]));
+                UsageCollection u = GetData((JObject)data[pokemon.Name]["moves"]);
+                List<string> moves = GetNames(ranks["movesRank"], usages["movesUsage"], u);
+                //List<string> moves=GetNames(ranks["movesRank"], usages["movesUsage"], GetData((JObject)data[pokemon.Name]["Moves"]));
                 moves.RemoveAll(i => !dmgAttacks.Contains(i));
                 pokemon.Moves = moves;
 
@@ -198,6 +200,7 @@ namespace Set_Parser
                 //Note- additional spreads are to be added when generating list/importables/setdex
                 pokemon.Spreads= GetNames(ranks["evsRank"], usages["evsUsage"], GetData((JObject)data[pokemon.Name]["Spreads"]));
             }
+            Console.WriteLine("hi");
         }
 
         //Validates the inputs from the text boxes in the main window    

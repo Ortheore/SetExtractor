@@ -14,7 +14,7 @@ Will be commenting TEST and ISSUE where appropriate. Remove all tests when done 
 
 ===================================================
 Current test function now runs through to completion.
->Moves is empty
->Spreads is empty
+>moves/items currently returning the last item in the json data. Only one in the case of moves, despite being meant to use more. This probably holds true for abilities as well
+>Spreads is coming up null
 
 Have only tested for 3.41% usg, 4 moves, 1 ability, 1 item, 1 spread. Further testing required. Need to test usg for moves/abilities/items/spreads, ranks for pokemon. Need to test having both rank and usg as criteria. Need to test for multiple entries moves/items/spreads/abilities.
