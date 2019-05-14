@@ -96,6 +96,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="attacks.json" />
+    <None Include="oldAttacks.json" />
     <None Include="bin\Debug\attacks.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

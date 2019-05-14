@@ -181,6 +181,7 @@ namespace Set_Parser
             //Load list of damaging attacks
             StreamReader reader = new StreamReader("attacks.json");
             JObject attacks = JObject.Parse(reader.ReadToEnd());
+            reader.Close();
             string[] dmgAttacks = attacks["attacks"].ToObject<string[]>();
 
             //Fill out the rest of the pokemon class
