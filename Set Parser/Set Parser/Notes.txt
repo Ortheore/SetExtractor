@@ -13,8 +13,26 @@ Consider scrapping this entirely. I plan on replicating this on the website as w
 Will be commenting TEST and ISSUE where appropriate. Remove all tests when done with them, while issues should be dealt with eventually. TWEAK is for stuff that works, but is done in a really stupid manner. UNTESTED is purely for when I decide I'm due to back this up to github, but I'm in the middle of working on stuff
 
 ===================================================
-Current test function now runs through to completion.
->moves/items currently returning the last item in the json data. Only one in the case of moves, despite being meant to use more. This probably holds true for abilities as well
->Spreads is coming up null
+I *think* all the code processing stats works now, although it is somewhat untested
 
 Have only tested for 3.41% usg, 4 moves, 1 ability, 1 item, 1 spread. Further testing required. Need to test usg for moves/abilities/items/spreads, ranks for pokemon. Need to test having both rank and usg as criteria. Need to test for multiple entries moves/items/spreads/abilities.
+
+==========================================
+I'm not going to see this through to completion. All I want is for it to be usable. Generating importables is probably the easiest way to go, since it is readily usable with my fork of the damage calculator. JSON is unsupported by my calculator, so I won't bother with that. Generating a readable list is the ideal option, but in order for it to be usable, it would take a deceptive amount of work, as the list must be sortable by move power. Type efficacy would also be ideal.
+
+Also consider going back and tinkering with the damage calc further so that it displays results for all moves, rather than just the ones with the most damage
+
+Sorting:
+>Requires function with damage formula
+>The damage formula should arbitrarily decide the otherwise random value- whether max or min roll doesn't matter as it's all relative anyway
+>Requires bp and phys/spec data for all attacking moves
+>Many moves have variable power (e.g. Gyro Ball, Water Spout). It varies as to whether or not assuming max power is sensible (probably worthwhile for WSpout, not so much for GBall)
+>Must account for generational differences
+>Must account for unusual mechanics (e.g. Explosion in g1-4)
+>Requires generation input
+>Requires some sort of benchmark. I'm going to say an uninvested mon with base 100 stats. At the very least, SToss and NShade dont really work well with a benchmark though.
+
+Type efficacy:
+>Requires type chart for each gen
+>Requires type input... obviously
+>Requires type for each move... obviously

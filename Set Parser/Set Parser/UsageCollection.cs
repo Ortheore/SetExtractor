@@ -27,41 +27,13 @@ namespace Set_Parser
 
         public List<string> ApplyFilter(int rank)
         {
-            if (rank > usages.Count) rank = usages.Count;
-            Usage[] topRanks = new Usage[rank];
+            List<Usage> workingList = usages;
+            workingList.Sort((u1, u2) => -1 * u1.Value.CompareTo(u2.Value));
+            if (rank < workingList.Count) workingList.RemoveRange(rank, workingList.Count - rank);
 
-            int counter = 0;
-            foreach (Usage element in usages)
-            {
-                if (counter < rank)
-                {
-                    topRanks[counter] = element;
-                    //Array does not need to be sorted unless I'm about to start removing elements from the array
-                    if (counter == rank - 1)
-                    {
-                        Array.Sort(topRanks, delegate (Usage use1, Usage use2)
-                        {
-                            return use2.Value.CompareTo(use1.Value);
-                        });
-                    } else counter++;
-                }
-                else
-                {
-                    if (element.Value > topRanks[counter].Value)
-                    {
-                        topRanks[counter] = element;
-                        Array.Sort(topRanks, delegate (Usage use1, Usage use2)
-                        {
-                            return use2.Value.CompareTo(use1.Value);
-                        });
-                    }
-                }
-            }
             List<string> results = new List<string>();
-            for (int s = 0; s < topRanks.Length; s++)
-            {
-                results.Add(topRanks[s].Name);
-            }
+            foreach (Usage usage in workingList) results.Add(usage.Name);
+
             return results;
         }
 
