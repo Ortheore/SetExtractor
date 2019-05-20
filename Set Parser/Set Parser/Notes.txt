@@ -1,3 +1,7 @@
+Shit, I should probably think about the fact that this is public. Especially since I'm often leaving notes about really basic stuff- probably embarrassing. Oh well, not much to be done I guess.
+
+===============
+
 Should probably tweak UI so that stuff that's on the right hand side is aligned appropriately
 Also should handle window resizing
 Haven't implemented much in the way of error handling. Will need to fix that
@@ -17,6 +21,8 @@ I *think* all the code processing stats works now, although it is somewhat untes
 
 Have only tested for 3.41% usg, 4 moves, 1 ability, 1 item, 1 spread. Further testing required. Need to test usg for moves/abilities/items/spreads, ranks for pokemon. Need to test having both rank and usg as criteria. Need to test for multiple entries moves/items/spreads/abilities.
 
+Strongly suspect more needs to be done in securing this program- this is something I frequently overlook with these projects because they usually only run locally, but this does connect to the internet so I should really be mindful of this kind of thing
+
 ==========================================
 I'm not going to see this through to completion. All I want is for it to be usable. Generating importables is probably the easiest way to go, since it is readily usable with my fork of the damage calculator. JSON is unsupported by my calculator, so I won't bother with that. Generating a readable list is the ideal option, but in order for it to be usable, it would take a deceptive amount of work, as the list must be sortable by move power. Type efficacy would also be ideal.
 
@@ -25,10 +31,10 @@ Also consider going back and tinkering with the damage calc further so that it d
 Sorting:
 >Requires function with damage formula
 >The damage formula should arbitrarily decide the otherwise random value- whether max or min roll doesn't matter as it's all relative anyway
->Requires bp and phys/spec data for all attacking moves
+>Requires bp and phys/spec data for all attacking moves. This is easiest to obtain from the damage calc, but it's in js and each successive generation inherits from the prior gen, idk if that'd make a difference
 >Many moves have variable power (e.g. Gyro Ball, Water Spout). It varies as to whether or not assuming max power is sensible (probably worthwhile for WSpout, not so much for GBall)
 >Must account for generational differences
->Must account for unusual mechanics (e.g. Explosion in g1-4)
+>Must account for unusual mechanics (e.g. Explosion in g1-4). This is easiest to determine by going through the appropriate damage.js file in the damage calc. All the weird stuff seems to be in CALCULATE_DAMAGE_[gen] or getDamageResult in current gen. There's probably a library to handle js, but the amount of information required is very significant either way, and adding it all would be a lot of work. Actually, come to think of it if I just add a popup with gen input and space for importable that could work, since moveset_import.js could handle all that (EDIT probably not, there are other files it is dependent on)
 >Requires generation input
 >Requires some sort of benchmark. I'm going to say an uninvested mon with base 100 stats. At the very least, SToss and NShade dont really work well with a benchmark though.
 
@@ -36,3 +42,12 @@ Type efficacy:
 >Requires type chart for each gen
 >Requires type input... obviously
 >Requires type for each move... obviously
+
+https://stackoverflow.com/questions/44498693/how-to-call-js-function-from-c-sharp-wpf
+This is a good idea tbh. Could just include my version of the damage calc and either dump data directly into it via importable or use its scripts to generate regular list
+https://stackoverflow.com/questions/10176556/run-javascript-in-c-sharp-wpf-form?lq=1
+This is also interesting
+
+Also if I do decide to keep the calculator files in my project, I'd want a way of keeeping them updated
+https://stackoverflow.com/questions/1871282/nested-git-repositories
+https://git-scm.com/book/en/v2/Git-Tools-Submodules

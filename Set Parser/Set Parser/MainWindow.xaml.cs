@@ -50,7 +50,19 @@ namespace Set_Parser
         {
             BtnRecent_Click(null, null);
             cbxTier.SelectedValue = "gen7ubers-1760.json";
+
             tbxLevel.Text = "100";
+            tbxPokeUsage.Text = "3.41";
+            tbxPokeRank.Text = "";
+            tbxMovesUsage.Text = "";
+            tbxMovesRank.Text = "4";
+            tbxAbilitiesUsage.Text = "";
+            tbxAbilitiesRank.Text = "1";
+            tbxItemsUsage.Text = "";
+            tbxItemsRank.Text = "1";
+            tbxEVsUsage.Text = "";
+            tbxEVsRank.Text = "1";
+
             BtnGetStats_Click(null, null);
         }
 
