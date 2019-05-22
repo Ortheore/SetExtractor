@@ -1,0 +1,4 @@
+[submodule "Set Parser/Set Parser/calc"]
+	path = Set Parser/Set Parser/calc
+	url = https://github.com/Ortheore/honko-damagecalc.git
+	branch = working
