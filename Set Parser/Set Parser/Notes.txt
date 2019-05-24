@@ -1,3 +1,6 @@
+OFFICIALLY ABANDONED
+I really wanted to finish this, but it's just way too much work, and it's getting in the way of all my other stuff
+===============
 Shit, I should probably think about the fact that this is public. Especially since I'm often leaving notes about really basic stuff- probably embarrassing. Oh well, not much to be done I guess.
 
 ===============
@@ -17,12 +20,17 @@ Consider scrapping this entirely. I plan on replicating this on the website as w
 Will be commenting TEST and ISSUE where appropriate. Remove all tests when done with them, while issues should be dealt with eventually. TWEAK is for stuff that works, but is done in a really stupid manner. UNTESTED is purely for when I decide I'm due to back this up to github, but I'm in the middle of working on stuff
 
 ===================================================
+CURRENT Going to have to go back and rework how I handle EV spreads. Although I can condense max and maxZero into one spread (252/252/0/252/0/0), natures ruin things for maxPlus and maxMaxPlus- for each one I need two different spreads (ATK/DEF and SPA/SDF), as I don't have any reasonable means of identifying what is actually needed, aside from excluding ATK+ if all special moves are used and vice-versa (even that would require additional work)
+
 I *think* all the code processing stats works now, although it is somewhat untested
 
 Have only tested for 3.41% usg, 4 moves, 1 ability, 1 item, 1 spread. Further testing required. Need to test usg for moves/abilities/items/spreads, ranks for pokemon. Need to test having both rank and usg as criteria. Need to test for multiple entries moves/items/spreads/abilities.
 
 Strongly suspect more needs to be done in securing this program- this is something I frequently overlook with these projects because they usually only run locally, but this does connect to the internet so I should really be mindful of this kind of thing
 
+Consider locking the inputs for usages/ranks until review is implemented
+
+Not sure a WPF window with Text block is the best way of displaying the output. It's literally just a wall of text. However, it should still do the job, and I'm not going to spend time researching this when I've got a solution that's good enough
 ==========================================
 I'm not going to see this through to completion. All I want is for it to be usable. Generating importables is probably the easiest way to go, since it is readily usable with my fork of the damage calculator. JSON is unsupported by my calculator, so I won't bother with that. Generating a readable list is the ideal option, but in order for it to be usable, it would take a deceptive amount of work, as the list must be sortable by move power. Type efficacy would also be ideal.
 

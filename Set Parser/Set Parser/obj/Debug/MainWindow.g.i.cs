@@ -560,6 +560,12 @@ namespace Set_Parser {
             return;
             case 43:
             this.btnImportable = ((System.Windows.Controls.Button)(target));
+            
+            #line 54 "..\..\MainWindow.xaml"
+            this.btnImportable.Click += new System.Windows.RoutedEventHandler(this.BtnImportable_Click);
+            
+            #line default
+            #line hidden
             return;
             }
             this._contentLoaded = true;

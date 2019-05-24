@@ -51,6 +51,6 @@
         <Button x:Name="btnReview" Content="Review" HorizontalAlignment="Left" Margin="417,384,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False"/>
         <Button x:Name="btnList" Content="Get List" HorizontalAlignment="Left" Margin="232,409,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False"/>
         <Button x:Name="btnSetDex" Content="Get SetDex" HorizontalAlignment="Left" Margin="417,409,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False"/>
-        <Button x:Name="btnImportable" Content="Get Importables" HorizontalAlignment="Left" Margin="312,409,0,0" VerticalAlignment="Top" Width="100" IsEnabled="False"/>
+        <Button x:Name="btnImportable" Content="Get Importables" HorizontalAlignment="Left" Margin="312,409,0,0" VerticalAlignment="Top" Width="100" IsEnabled="False" Click="BtnImportable_Click"/>
     </Grid>
 </Window>

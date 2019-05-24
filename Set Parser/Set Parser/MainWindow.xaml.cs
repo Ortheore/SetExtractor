@@ -43,10 +43,10 @@ namespace Set_Parser
             allPeriods.Remove("../");
             cbxPeriod.ItemsSource = allPeriods;
 
-            RunTest();//TEST... obviously
+            RunTest("importables");//TEST... obviously
         }
 
-        private void RunTest()//TEST... obviously
+        private void RunTest(string input)//TEST... obviously
         {
             BtnRecent_Click(null, null);
             cbxTier.SelectedValue = "gen7ubers-1760.json";
@@ -64,6 +64,8 @@ namespace Set_Parser
             tbxEVsRank.Text = "1";
 
             BtnGetStats_Click(null, null);
+
+            if (input == "importables") BtnImportable_Click(null, null);
         }
 
         //Updates target list with text of all links present on page in url. Also returns HtmlDoc since that's useful
@@ -211,7 +213,11 @@ namespace Set_Parser
                 //Note- additional spreads are to be added when generating list/importables/setdex
                 pokemon.Spreads= GetNames(ranks["evsRank"], usages["evsUsage"], GetData((JObject)data[pokemon.Name]["Spreads"]));
             }
-            Console.WriteLine("hi");//TEST
+
+            //ISSUE since these are not implemented, I won't be enabling them
+            //btnList.IsEnabled = true;
+            btnImportable.IsEnabled = true;
+            //btnSetDex.IsEnabled = true;
         }
 
         //Validates the inputs from the text boxes in the main window    
@@ -251,6 +257,36 @@ namespace Set_Parser
                 return true;
             }
             else return false;
+        }
+
+        private void BtnImportable_Click(object sender, RoutedEventArgs e)
+        {
+            //TWEAK Consider checking how many importables are actually needed before generating. May want to throw an error if there are too many, though I don't know how many is too many
+            string importables = "";
+
+            //ISSUE I am horrified. What am I doing.
+            foreach(Pokemon pokemon in sets)
+            {
+                //Add spreads from checkboxes
+                //Remove other max and max/zero spreads from list and replace with 252/252/0/252/0/0
+                //Note that with maxZero there are other spreads that are functionally the same that might be used e.g. 252/4
+                //For maxPlus and maxMaxPlus, simply check if there is an equivalent spread before adding
+                List<string> spreads = pokemon.Spreads;
+                
+                foreach (string item in pokemon.Items)
+                {
+                    foreach(string ability in pokemon.Abilities)
+                    {
+                        for (int m = 0; m < pokemon.Moves.Count; m += 4)
+                        {
+                            
+                        }
+                    }
+                }
+            }
+
+            TextOutput output = new TextOutput(importables);
+            output.Show();
         }
 
         //Checks that an float is >=0 and <=100, converts to decimal, saves it to the target and returns whether or not it's valid
